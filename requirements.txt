@@ -1,0 +1,4 @@
+langchain-community==0.3.18
+edge-tts==7.0.0
+streamlit==1.42.2
+Pillow==10.4.0
