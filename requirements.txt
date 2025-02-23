@@ -1,4 +1,5 @@
 langchain-community
+youtube-transcript-api
 edge-tts
 streamlit
 Pillow
