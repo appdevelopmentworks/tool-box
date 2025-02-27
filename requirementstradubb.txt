@@ -3,3 +3,9 @@ edge-tts==7.0.0
 streamlit==1.42.2
 Pillow==10.4.0
 youtube-transcript-api==0.6.3
+
+langchain-community
+youtube-transcript-api
+edge-tts
+streamlit
+Pillow

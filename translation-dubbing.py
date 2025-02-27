@@ -4,6 +4,7 @@ import streamlit as st
 from PIL import Image
 import asyncio
 import os
+import io
 
 
 @st.cache_data
@@ -81,18 +82,26 @@ if btndub:
         voice = "ja-JP-NanamiNeural"
     #レート
     ra = f"+{rate}%"
+    # バッファメモリに音声データを書き出す
+    audio_buffer = io.BytesIO()    
     #音声書き出しを非同期で呼ぶ
     asyncio.run(dubbing(st.session_state.text_value, voice=voice, rate=ra, savefile=savef))
+    with open(savef, "rb") as f:
+        audio_buffer.write(f.read())
+    audio_buffer.seek(0)  # バッファの先頭に移動    
     #再生プレイヤー生成
     st.audio(savef, format="audio/mp3")
-    #ダウンロードボタン生成
-    with open(savef, "rb") as file:
-        btdl = st.download_button(
-            label="ダウンロード",
-            data=file,
-            file_name=savef,
-            mime="audio/mpeg"
-        )
+    # ダウンロードボタン生成
+    btdl = st.download_button(
+        label="ダウンロード",
+        data=audio_buffer,
+        file_name=savef,
+        mime="audio/mpeg"
+    )
+
+    # 一時ファイルの削除
+    os.remove(savef)
+
 
 
 
