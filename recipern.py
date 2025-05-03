@@ -73,11 +73,11 @@ if upfile is not None:
     
 if imagecam is not None:
     # カメラで撮影した場合の処理
-    #st.image(image, caption='撮影した画像', use_container_width=True)
-    st.image(imagecam, caption='撮影した画像', use_column_width=True)
-    #st.code(generate_recipe(image), language='markdown')
-    #generate_recipe(image)
+    st.image(imagecam, caption='撮影した画像', use_container_width=True)
+    #st.image(imagecam, caption='撮影した画像', use_column_width=True)
     res = generate_recipe(imagecam)
     for chunk in res:
         st.write(chunk.text, end="", flush=True)
     st.write()  # 最後の改行
+    #st.code(generate_recipe(image), language='markdown')
+    #generate_recipe(image)
