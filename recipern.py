@@ -9,7 +9,7 @@ import io
 
 
 # API キーをグローバルに設定
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+#genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 #モデルを指定
@@ -30,14 +30,14 @@ def generate_recipe(image_part):
             }
         ]
 
-        response = model.generate_content(contents, stream=True)
+        response = model.generate_content(contents, stream=False)
         
-        for chunk in response:
-            #st.write(chunk.text, end="", flush=True)
-            st.write(chunk.text, end="")
-        st.write()  # 最後の改行
+        # for chunk in response:
+        #     #st.write(chunk.text, end="", flush=True)
+        #     st.write(chunk.text, end="")
+        # st.write()  # 最後の改行
         
-        #return response
+        return response.text
     except Exception as e:
         print(f"エラーが発生しました: {e}")
         return None
@@ -67,12 +67,17 @@ imagecam = st.camera_input("カメラで食材を撮影してください")
 if upfile is not None:
     image = Image.open(upfile)
     st.image(image, caption="アップロードされた画像", use_column_width=True)
-    #st.code(generate_recipe(image), language='markdown')
-    generate_recipe(image)
+    data_load_state = st.text("レシピ考え中...")
+    res = generate_recipe(image)
+    st.write(res)
+    data_load_state.text("レシピを作成しました！")
 
     
 if imagecam is not None:
     # カメラで撮影した場合の処理
     st.image(imagecam, caption='撮影した画像', use_container_width=True)
     #st.image(imagecam, caption='撮影した画像', use_column_width=True)
-    generate_recipe(imagecam)
+    data_load_state = st.text("レシピ考え中...")
+    res = generate_recipe(image)
+    st.write(res)
+    data_load_state.text("レシピを作成しました！")
