@@ -7,8 +7,11 @@ from PIL import Image
 import io
 
 
+
 # API キーをグローバルに設定
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+
 #モデルを指定
 model = genai.GenerativeModel(model_name="gemini-2.5-pro-exp-03-25")
 
