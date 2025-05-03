@@ -49,10 +49,10 @@ def generate_recipe(image_part):
 
 
 
-
+##########################################################################################
 
 st.title("カメラで献立")
-st.caption("画像ファイルを元に献立を考えます。")
+st.text("画像ファイルを元に献立を考えます。")
 
 image = Image.open('./images/recipern.png')
 st.image(image, width=700)
