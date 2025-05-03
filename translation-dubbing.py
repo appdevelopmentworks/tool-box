@@ -38,8 +38,8 @@ if "text_value" not in st.session_state:
 st.title("Youtube音声吹替アプリ")
 st.caption("Youtubeのリンクを送信すると日本語に吹替えます")
 
-image = Image.open('アプリバナー.png')
-st.image(image, width=2000)
+image = Image.open('./images/toolbox.png')
+st.image(image, width=700)
 
 url = st.text_input("YoutubeのURL:", value="")
 rate = st.slider("読み上げ再生速度(50が標準)",min_value=0, max_value=100, value=50)
