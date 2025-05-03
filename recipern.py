@@ -66,7 +66,8 @@ imagecam = st.camera_input("カメラで食材を撮影してください")
 
 if upfile is not None:
     image = Image.open(upfile)
-    st.image(image, caption="アップロードされた画像", use_column_width=True)
+    st.image(image, caption="アップロードされた画像", use_container_width=True)
+    #st.image(image, caption="アップロードされた画像", use_column_width=True)
     data_load_state = st.text("レシピ考え中（約30秒お待ちください）...")
     res = generate_recipe(image)
     st.write(res)
