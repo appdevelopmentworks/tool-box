@@ -32,10 +32,12 @@ def generate_recipe(image_part):
 
         response = model.generate_content(contents, stream=True)
         
-        # for chunk in response:
-        #     print(chunk.text, end="", flush=True)
-        #st.write()  # 最後の改行
-        return response
+        for chunk in response:
+            #st.write(chunk.text, end="", flush=True)
+            st.write(chunk.text, end="")
+        st.write()  # 最後の改行
+        
+        #return response
     except Exception as e:
         print(f"エラーが発生しました: {e}")
         return None
@@ -66,18 +68,11 @@ if upfile is not None:
     image = Image.open(upfile)
     st.image(image, caption="アップロードされた画像", use_column_width=True)
     #st.code(generate_recipe(image), language='markdown')
-    res = generate_recipe(image)
-    for chunk in res:
-        st.write(chunk.text, end="", flush=True)
-    st.write()  # 最後の改行
+    generate_recipe(image)
+
     
 if imagecam is not None:
     # カメラで撮影した場合の処理
     st.image(imagecam, caption='撮影した画像', use_container_width=True)
     #st.image(imagecam, caption='撮影した画像', use_column_width=True)
-    res = generate_recipe(imagecam)
-    for chunk in res:
-        st.write(chunk.text, end="", flush=True)
-    st.write()  # 最後の改行
-    #st.code(generate_recipe(image), language='markdown')
-    #generate_recipe(image)
+    generate_recipe(imagecam)
