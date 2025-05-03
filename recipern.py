@@ -39,4 +39,4 @@ if upfile is not None:
     
 if image is not None:
     # カメラで撮影した場合の処理
-    st.image(image, caption='撮影した画像', use_column_width=True)
+    st.image(image, caption='撮影した画像', use_container_width=True)
